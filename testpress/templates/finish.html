@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>You have successfully finished the test</h1>
+{% for key,value in context.items() %}
+    <ul class="list-group-item">{{key}}</ul>
+
+    <ul>Your Answer: <strong>{{value}}</strong></ul>
+{% endfor %}
+<div class="jumbotron">
+<h3>Your Score : <strong>{{score}}</strong></h3>
+<br>
+<h3>Total time taken : <strong>{{timer}} Minutes</strong></h3>
+<button type="button" class="btn btn-warning"><a href="{{url_for('quiz.get_api')}}">Start Again</a></button>
+</div>
+{% endblock%}

@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>QUIZ PAGE</h1>
+
+<div class="jumbotron">
+    <div class="card-body">
+<h3>{{question['question']}}</h3>
+<br>
+<form action="{{url_for('quiz.check_answers')}}" method="post">
+{% if unhide == 0 %}
+{% for choice in choices %}
+    <input type="radio" class="form-check-input" name="option" value="{{choice}}+{{i}}"><p>{{choice}}</p>
+{% endfor %}
+{% endif %}
+{% if unhide == 1 %}
+{% for choice in choices %}
+    <li>{{choice}}</li>
+{% endfor %}
+{% endif %}
+</div>
+</div>
+<br>
+{% if unhide == 0 %}
+    <input type="submit" class="btn btn-primary btn" value="Check Answers">
+{% endif %}
+</form>
+
+
+{% if unhide == 1 %}
+    {% if answer == 0%}
+    <div class="card">
+        <h3><strong>Incorrect Answer</strong></h3>
+        <br>
+        <p>The correct answer is <strong>{{question['correct_answer']}}</strong></p>
+    </div>
+    {% endif %}
+    {% if answer == 1%}
+    <div class="card">
+        <h3><strong>Correct Answer</strong></h3>
+    </div> 
+    <br> 
+    {% endif%}
+    <button type="button" class="btn btn-warning btn"><a href="{{url_for('quiz.questions_display',question_id = i+1)}}">Next</a></button>
+    {% endif %}
+
+{% endblock%}
