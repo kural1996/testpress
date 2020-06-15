@@ -21,8 +21,17 @@
 </div>
 <br>
 {% if unhide == 0 %}
-    <input type="submit" class="btn btn-primary btn" value="Check Answers">
+    <input type="submit"  class="btn btn-primary btn" value="Check Answers">
 {% endif %}
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript"> 
+    $("form").submit(function (e) {
+        if(!$("input[name='option']").is(":checked")) {
+            e.preventDefault();
+            alert("Please select an answer")
+        }
+    });
+</script>
 </form>
 
 
