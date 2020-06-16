@@ -8,10 +8,10 @@ import datetime
 
 quiz = Blueprint('quiz',__name__)
 
-global score
-score = 0
-global start_time
-start_time = datetime.datetime.now()
+score = int
+#score = 0
+start_time  = datetime
+
 
 @quiz.route('/',methods = ['GET','POST'])
 def index():
@@ -19,6 +19,8 @@ def index():
 
 @quiz.route('/quizapi',methods = ['GET','POST'])
 def get_api():
+    global score
+    score = 0
     global start_time
     start_time = datetime.datetime.now()
     models.qanda.query.delete()
@@ -33,8 +35,6 @@ def get_api():
         db.session.add(qanda_input)
         db.session.commit()
         i = i+1
-    global score
-    score = 0
     return redirect(url_for('quiz.questions_display',question_id = 0))
 
 @quiz.route('/quiz/<int:question_id>',methods = ['GET','POST'])
@@ -84,5 +84,6 @@ def check_answers():
     else:
         return render_template('quiz.html', answer = 0, unhide = 1,question= question,choices=choices, i = question_id)
         #return 'incorrect'
+
 
 
